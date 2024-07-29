@@ -1,7 +1,7 @@
 ﻿
 string mensagemDeBoasVindas = "Boas vindas ao  COMEX!!!";
 
-List<string> ListaDeProdutos = new List<string>();
+List<Produto> ListaDeProdutos = new List<Produto>();
 void exibirLogo()
 {
     Console.WriteLine(@"
@@ -22,7 +22,7 @@ void exibirOpcoesDoMenu()
     Console.WriteLine("\nDigite 2 para listar produtos");
     Console.WriteLine("\nDigite -1 para sair");
 
-    Console.WriteLine("\nDigite a sua opção:");
+    Console.Write("\nDigite a sua opção:");
     string opcaoEscolhida = Console.ReadLine();
     int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
 
@@ -50,7 +50,12 @@ void ListarProdutos()
     foreach(var produtos in ListaDeProdutos)
     {
 
-    Console.WriteLine("Produto: "+produtos); }
+    Console.WriteLine("Produto: "+produtos.Nome); 
+    }
+    Console.WriteLine("\nDigite uma recla para voltar ao menu principal");
+    Console.ReadKey();
+    Console.Clear();
+    exibirOpcoesDoMenu();
 }
     
 
@@ -63,7 +68,7 @@ void criarProduto()
     Console.Write("digite o nome do produto: ");
     string produto = Console.ReadLine();
 
-    ListaDeProdutos.Add(produto);
+    ListaDeProdutos.Add(new Produto(produto));
     Console.WriteLine($"O produto {produto} foi registrado com sucesso!");
     Console.WriteLine("\nDigite uma recla para voltar ao menu principal");
     Console.ReadKey();
@@ -72,5 +77,6 @@ void criarProduto()
 
 
 }
+
 
 exibirOpcoesDoMenu();
