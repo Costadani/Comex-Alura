@@ -1,8 +1,10 @@
-﻿ class Produto
+﻿namespace Comex.Modelos;
+internal class Produto
 {
+
     public string Nome { get; }
     public string Descricao { get; set; }
-    public float PrecoUnitario { get; }
+    public decimal PrecoUnitario { get; set; }
     public int Quantidade { get; set; }
 
     public Produto(string nome)
