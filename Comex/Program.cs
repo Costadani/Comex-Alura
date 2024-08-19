@@ -20,6 +20,7 @@ opcoes.Add(1, new MenuCadastrarProduto());
 opcoes.Add(2, new MenuListarProdutos());
 opcoes.Add(3, new MenuListarPorNome());
 opcoes.Add(4, new MenuListarPorPreco());
+opcoes.Add(5, new MenuConsultarAPI());
 void exibirLogo()
 {
     Console.WriteLine(@"
@@ -31,13 +32,14 @@ void exibirLogo()
 ░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝");
 }
 
-void exibirOpcoesDoMenu()
+async Task exibirOpcoesDoMenu()
 {
     exibirLogo();
     Console.WriteLine("\nDigite 1 - para criar produto.");
     Console.WriteLine("Digite 2 - para listar produtos.");
     Console.WriteLine("Digite 3 - para listar produtos ordenados por nome.");
     Console.WriteLine("Digite 4 - para listar produtos ordenados por preço.");
+    Console.WriteLine("Digite 5 - para consultar api externa.");
     Console.WriteLine("\n\nDigite -1 para sair");
 
     Console.Write("\nDigite a sua opção:");
@@ -46,14 +48,22 @@ void exibirOpcoesDoMenu()
 
     if (opcaoEscolhidaNumerica > 0)
     {
-        Menu menu = opcoes[opcaoEscolhidaNumerica];
-        menu.Executar(ListaDeProdutos);
-        exibirOpcoesDoMenu();
+
+        if (opcaoEscolhidaNumerica == 5)
+        {
+            await new MenuConsultarAPI().Executar();
+            await exibirOpcoesDoMenu();
+        }
+        else
+        {
+            Menu menu = opcoes[opcaoEscolhidaNumerica];
+            menu.Executar(ListaDeProdutos);
+            await exibirOpcoesDoMenu();
+        }
     }
+
+
+
+
 }
-
-
-
-
-
-exibirOpcoesDoMenu();
+await exibirOpcoesDoMenu();
