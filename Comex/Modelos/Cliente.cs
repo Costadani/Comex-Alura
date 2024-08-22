@@ -9,14 +9,10 @@ public class Cliente : IIdentificar
     public string Telefone { get; set; }
     public Endereco Endereco { get; set; }
 
-    public Cliente(string nome, string cpf, string email, string profissao, string telefone, Endereco endereco)
+    public Cliente(string nome)
     {
         Nome = nome;
-        CPF = cpf;
-        Email = email;
-        Profissao = profissao;
-        Telefone = telefone;
-        Endereco = endereco;
+       
     }
 
     public override string ToString()

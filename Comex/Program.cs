@@ -1,5 +1,6 @@
 ﻿using Comex.Modelos;
 using Comex.Menus;
+using Comex.Models;
 string mensagemDeBoasVindas = "Boas vindas ao  COMEX!!!";
 
 List<Produto> ListaDeProdutos = new List<Produto>()
@@ -16,11 +17,28 @@ List<Produto> ListaDeProdutos = new List<Produto>()
             new Produto("Farinha") { PrecoUnitario = 6.60m, Quantidade = 20 }
 };
 Dictionary<int, Menu> opcoes = new();
+
+List<Cliente> clientes = new() {
+   new Cliente("Carlos Daniel"){CPF = "000.000.000-01"},
+   new Cliente("Emilly"){CPF = "000.000.000-02"}
+};
+List<Pedido> pedidos = new() {
+    new Pedido(clientes[1]){Numero = 1001, Data = DateTime.Now},
+    new Pedido(clientes[0]){Numero = 1000, Data = DateTime.Now}
+
+};
+
 opcoes.Add(1, new MenuCadastrarProduto());
 opcoes.Add(2, new MenuListarProdutos());
 opcoes.Add(3, new MenuListarPorNome());
 opcoes.Add(4, new MenuListarPorPreco());
 opcoes.Add(5, new MenuConsultarAPI());
+opcoes.Add(6, new MenuCadastrarCliente(clientes));
+opcoes.Add(7, new MenuListarCliente(clientes));
+opcoes.Add(8, new MenuCadastrarPedido(pedidos, clientes));
+opcoes.Add(9, new MenuListarPedido(pedidos));
+opcoes.Add(10, new MenuAdicionarItem(pedidos));
+
 void exibirLogo()
 {
     Console.WriteLine(@"
@@ -40,6 +58,11 @@ async Task exibirOpcoesDoMenu()
     Console.WriteLine("Digite 3 - para listar produtos ordenados por nome.");
     Console.WriteLine("Digite 4 - para listar produtos ordenados por preço.");
     Console.WriteLine("Digite 5 - para consultar api externa.");
+    Console.WriteLine("Digite 6 - para cadastrar um cliente.");
+    Console.WriteLine("Digite 7 - Para ver a lista de Clientes");
+    Console.WriteLine("Digite 8 - Para cadastrar pedido");
+    Console.WriteLine("Digite 9 - Adicionar item ao pedido");
+    Console.WriteLine("Digite 10 - Para ver a lista de pedidos");
     Console.WriteLine("\n\nDigite -1 para sair");
 
     Console.Write("\nDigite a sua opção:");
